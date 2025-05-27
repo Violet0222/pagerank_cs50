@@ -164,6 +164,7 @@ def iterate_pagerank(corpus, damping_factor):
         pagerank = new_rank
         if small_diff:
             break
+    return pagerank
 
 if __name__ == "__main__":
     main()
