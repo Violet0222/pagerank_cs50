@@ -60,7 +60,6 @@ def transition_model(corpus, page, damping_factor):
     N = len(corpus)
     probabilities = dict()
     
-    
     links = corpus[page]
     number_of_page_links = len(links)
     
@@ -98,16 +97,16 @@ def sample_pagerank(corpus, damping_factor, n):
     
     for _ in range(n):
         counts[current_page] += 1
-        probabilities = transition_model(corpus, current_page,damping_factor)
+        probabilities = transition_model(corpus, current_page, damping_factor)
         
         pages = list(probabilities.keys())
         weights = list(probabilities.values())
         
         current_page = random.choices(pages, weights)[0]
        
-    
+
     for page in counts:
-        counts[page]= counts[page] / n
+        counts[page] = counts[page] / n
     
     return counts
 
@@ -154,6 +153,7 @@ def iterate_pagerank(corpus, damping_factor):
         if small_diff:
             break
     return pagerank
+
 
 if __name__ == "__main__":
     main()
