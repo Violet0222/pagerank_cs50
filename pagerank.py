@@ -104,7 +104,6 @@ def sample_pagerank(corpus, damping_factor, n):
         
         current_page = random.choices(pages, weights)[0]
        
-
     for page in counts:
         counts[page] = counts[page] / n
     
