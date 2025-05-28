@@ -85,33 +85,31 @@ def sample_pagerank(corpus, damping_factor, n):
     PageRank values should sum to 1.
     """
     
-    pages = list(corpus.keys())
-    
-    current_page = random.choice(pages)
+    pages = list(corpus)
     
     counts = {}
     
     for page in pages:
         counts[page] = 0
         
+    current_page = random.choice(pages)
+        
     counts[current_page] += 1
     
-    for i in range(n-1):
-        
+    for _ in range(n):
+        counts[current_page] += 1
         probabilities = transition_model(corpus, current_page,damping_factor)
         
         pages = list(probabilities.keys())
         weights = list(probabilities.values())
         
-        next_page = random.choices(pages, weights=weights, k=1)[0]
-        current_page = next_page
+        current_page = random.choices(pages, weights)[0]
+       
     
-    pagerank = {}
+    for page in counts:
+        counts[page]= counts[page] / n
     
-    for page, count in counts.items():
-        pagerank[page]=count/n
-    
-    return pagerank
+    return counts
 
 
 def iterate_pagerank(corpus, damping_factor):
